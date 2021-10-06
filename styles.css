@@ -1,0 +1,172 @@
+* {
+    margin:0;
+    box-sizing: 0;
+    padding:0;
+}
+
+
+nav {
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    height:100px
+}
+.navTitle {
+    text-align:center;
+    margin-left: 15px;
+    width:10%;
+}
+
+.navigation{
+
+    width:300px;
+
+    display:flex;
+    justify-content: space-around;
+}
+
+.banner {
+    background:url("./src/images/croppedBurger.svg");
+    background-color:rgb(178, 173, 173);
+    height:420px;
+    padding-left: 100px;
+    margin-left:20px;
+    margin-right:20px;
+    border-radius: 20px;
+    background-position: right;
+    background-repeat: no-repeat;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+  
+    
+}
+
+.home, .menu, .contact {
+    border:none;
+    background:none
+}
+
+
+footer {
+    background:red;
+}
+
+
+.burgerSaleMenu {
+
+    height:300px;
+    width:200px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    margin-right:50px;
+
+}
+
+.buy {
+    border:0;
+    background:rgb(229, 86, 86);
+    color:white;
+    width:150px;
+    height:30px;
+    border-radius: 30px;
+    
+
+}
+
+.hamburgerMenu {
+    display:none;
+}
+
+
+button {
+    margin-top:10px;
+    cursor:pointer;
+ 
+}
+
+
+.items {
+    margin-left: 20px;
+    margin-right:20px;
+    margin-top:10px;
+    display:flex;
+    justify-content:space-around;
+
+}
+
+.item{
+    width:250px;
+    background:rgb(178, 173, 173);
+    border-radius: 20px;
+}
+
+.popularItems {
+    background:green;
+    margin-top:20px;
+    margin-left: 20px;
+    margin-right:20px;
+    text-align: center;
+
+}
+
+footer {
+    text-align:center;
+    position:fixed;
+    bottom:0;
+
+}
+
+
+@media only screen and (max-width:650px){
+    .burgerSaleMenu {
+        margin-right: 200px;
+    }
+
+}
+@media only screen and (max-width:420px){
+    .navigation {
+        display:none;
+    }
+    .hamburgerMenu {
+        margin-right:10px;
+        display:block;
+        text-indent: -99999px;
+    }
+    .line {
+        display:block;
+        background:green;
+    }
+
+}
+
+@media only screen and (max-width:330px){
+    .banner {
+        height:300px;
+    }
+
+    .buy {
+        width:100px;
+    }
+
+    .burgerSaleMenu {
+        width:120px;
+        font-size: x-small;
+    }
+    
+
+}
+
+@media only screen and (max-width: 255px){
+    .buy {
+        width:80px;
+    }
+    .burgerSaleMenu {
+        margin-right:120px;
+        width:100px
+    }
+}
