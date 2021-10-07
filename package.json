@@ -1,0 +1,28 @@
+{
+  "name": "resturant-website",
+  "version": "1.0.0",
+  "description": "a resturant website",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack serve --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bgrotegut21/resturant-website.git"
+  },
+  "author": "Brayden Grotegut",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bgrotegut21/resturant-website/issues"
+  },
+  "homepage": "https://github.com/bgrotegut21/resturant-website#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.3.2",
+    "webpack": "^5.57.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.3.1"
+  }
+}

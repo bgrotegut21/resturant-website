@@ -1,0 +1,224 @@
+* {
+    margin:0;
+    box-sizing: 0;
+    padding:0;
+}
+
+
+nav {
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    height:100px
+}
+
+.homeSection{
+    font-family: helvetica, arial, sans-serif;
+}
+.navTitle {
+    text-align:center;
+    margin-left: 15px;
+    width:10%;
+}
+
+.home:hover, .menu:hover, .contact:hover {
+    border-bottom: 4px solid rgb(255, 191, 0);
+}
+
+.navigation{
+    font-family: helvetica, arial, sans-serif;
+}
+
+.navTitle {
+    color:orange;
+    font-family: helvetica, arial, sans-serif;
+}
+.navigation{
+
+    width:300px;
+
+    display:flex;
+    justify-content: space-around;
+}
+
+.banner {
+    background:url("./src/images/croppedBurger.svg");
+    background-color:rgb(178, 173, 173);
+    height:420px;
+    padding-left: 100px;
+    margin-left:20px;
+    margin-right:20px;
+    border-radius: 20px; 
+    background-position: right;
+    background-repeat: no-repeat;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+  
+    
+}
+
+.home, .menu, .contact {
+    border:none;
+    background:none
+}
+
+
+
+
+.burgerSaleMenu {
+
+    height:300px;
+    width:200px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    margin-right:50px;
+
+}
+
+.seeMenu {
+    border:0;
+    background:rgb(229, 86, 86);
+    color:white;
+    width:150px;
+    height:30px;
+    border-radius: 30px;
+}
+
+.seeMenu:hover {
+    background: rgb(209, 82, 82);
+}
+.hamburgerMenu {
+    display:none;
+}
+
+
+button {
+    margin-top:10px;
+    cursor:pointer;
+ 
+}
+
+
+.items {
+    margin-left: 20px;
+    margin-right:20px;
+    margin-top:10px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-around;
+
+}
+
+.item{
+    margin-top:10px;
+    width:250px;
+    height:250px;
+    line-height: 250px;
+    color:black;
+    background:rgb(178, 173, 173);
+    border-radius: 20px;
+}
+
+.itemText {
+    opacity: 0;
+}
+
+.itemText:hover{
+    opacity: 1;
+}
+
+
+.popularItems {
+
+    margin-top:20px;
+    margin-left: 20px;
+    margin-right:20px;
+    text-align: center;
+
+}
+
+.icecreamIcon {
+    background-image: url("src/images/icecream.svg");
+    background-repeat: no-repeat;
+}
+
+
+.hamburgerIcon {
+    background-image: url("src/images/hamburger.svg");
+    background-repeat: no-repeat;
+}
+
+footer {
+    height:70px;
+    text-align: center;
+    line-height: 70px;
+}
+
+.homeSection {
+    display:none;
+}
+
+
+@media only screen and (max-width:650px){
+    .burgerSaleMenu {
+        margin-right: 200px;
+    }
+
+}
+@media only screen and (max-width:420px){
+    .navigation {
+        display:none;
+    }
+    .hamburgerMenu {
+        margin-right:10px;
+        display:block;
+        text-indent: -99999px;
+    }
+    .line {
+        display:block;
+        background:green;
+    }
+
+}
+
+@media only screen and (max-width:330px){
+    .banner {
+        height:300px;
+    }
+
+    .seeMenu {
+        width:100px;
+    }
+
+    .burgerSaleMenu {
+        width:120px;
+        font-size: x-small;
+    }
+    
+
+}
+
+@media only screen and (max-width: 255px){
+    .seeMenu {
+        width:80px;
+    }
+    .burgerSaleMenu {
+        margin-right:120px;
+        width:100px
+    }
+}
+
+@media only screen and (max-width: 270px ){
+    .item{
+        height:100px;
+        width:100px;
+        line-height:100px;
+        font-size:x-small;
+    }
+}
