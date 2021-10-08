@@ -1,0 +1,137 @@
+.sections {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    font-family:'Lato',"sans-serif" ;
+    
+
+}
+
+.section {
+    width:400px;
+    background:rgb(127, 110, 224);
+    color:white;
+    border-radius: 20px;
+    margin:5px;
+    display:flex;
+
+    flex-direction: row;
+
+}
+
+
+.sectionImage {
+    width:200px;
+}
+
+
+.categorySelection {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin:10px;
+}
+
+
+
+.arrowUp {
+    display:none;
+}
+
+
+.currentCategory{
+    display:flex;
+    
+}
+
+.categoryButtons {
+
+    width:200px;
+    display:flex;
+    flex-direction:column;
+
+}
+
+
+.currentCategoryText {
+    font-family:'Lato',"sans-serif" ;
+
+}
+
+.sandwichesCategory, .sidesCategory, .dessertCategory {
+    
+    border:0;
+    font-family:'Lato',"sans-serif" ;
+    background:none;
+
+    font-size: large;
+    margin:0;
+    height:25px;
+}
+
+.sandwichesCategory:hover, .sidesCategory:hover, .dessertCategory:hover{
+    background:rgb(249, 248, 248);
+    border-radius: 20px;
+}
+
+.arrowUp, .arrowDown {
+    cursor:pointer;
+}
+.section:hover {
+    box-shadow:1px 4px 16px 1px #8E8E8E;
+
+
+}
+.textSection {
+    margin-left: 10px;
+    margin-top:10px;
+}
+
+.hamburgerMenu {
+    cursor:pointer;
+}
+
+.categoryButtons {
+    display:none;
+}
+
+.sidesSection {
+    display:none;
+}
+
+.dessertSection {
+    display:none;
+}
+
+
+.menuSection{
+    display:none;
+}
+
+
+
+@media only screen and (max-width:410px){
+    .section {
+        flex-direction: column;
+        align-items: center;
+        height:360px;
+        width:220px
+    
+}
+
+
+
+}
+
+@media only screen and (max-width:210px){
+    .section {
+        width:130px;
+        height:210px;
+        font-size: x-small
+    }
+
+    .sectionImage {
+        width:100px;
+        
+    }
+}
