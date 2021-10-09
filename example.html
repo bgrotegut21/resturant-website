@@ -15,6 +15,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="home.css" type="text/css">
         <link rel="stylesheet" href="menu.css" type="text/css">
+        <link rel="stylesheet" href="adress.css" type="text/css">
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+            </style>
         <title>Document</title>
     </head>
     <body>
@@ -29,6 +34,14 @@
 
            
         </nav>
+
+
+        <div class = "hamburgerNavigation">
+            <button class = "home2 hamburgerButton">Home</button>
+            <button class = "menu3 hamburgerButton">Menu</button>
+            <button class = "contact3 hamburgerButton">Contact</button>
+
+        </div>
         <main class = "homeSection">
             <div class = "banner">
                 <div class = "burgerSaleMenu">
@@ -53,31 +66,99 @@
             </div>
         </main>
         <main class = "menuSection">
-            <div class = "categories"> 
-                <h2 class = "selectionText"> Selection</h2>
-                <select class = "selector">
-                        <option value="sandwiches">Sandwiches</option>
-                        <option value="sides">Sides</option>
-                        <option value="deserts">Deserts</option>
-                </select>
+            <div class = "categorySelection">
+                <div class = "currentCategory">
+                    <img class = "arrowDown" src="src/images/arrowDrop.svg" alt="arrowDrop">
+                    <img class = "arrowUp" src="src/images/arrowUp.svg" alt="arrow up">
+                    <h2 class = "currentCategoryText">Sandwiches</h2>
+                </div>
+                <div class = "categoryButtons">
+                    <button class = "sandwichesCategory">Sandwiches</button>
+                    <button class = "sidesCategory">Sides</button>
+                    <button class = "dessertCategory">Desserts</button>
+                </div>
+
+ 
             </div>
             <div class = "sections sandwichSection">
                 <div class = "section">
-                    <h2>Hamburger</h2>
-                    <p>A sanwich that has two buns, made with fresh italian tomatoes, and delectious beef in the middle</p>
+                    <img class = "sectionImage hamburgerImage" src="./src/images/hamburger.svg" alt="Hamburger Image">
+                    <div class = "textSection">
+                        <h2>Hamburger</h2>
+                        <p>A sandwich that has two buns, made with fresh italian tomatoes, and delecious beef.</p>
+                    </div>
+
                 </div>
                 <div class = "section">
-                    <h2>Cheeseburger</h2>
-                    <p>A sanwich that has two buns, made with fresh italian tomatoes, and delectious beef in the middle</p>
+                    <img class = "sectionImage cheeseburgerImage" src="./src/images/cheeseburger.svg" alt="Cheeseburger Image">
+                    <div class = "textSection">
+                        <h2>Cheeseburger</h2>
+                        <p>A sandwich that has two buns, made with fresh italian tomatoes, and delecious beef and cheddar cheese.</p>
+                    </div>                 
+                </div>
+
+                <div class = "section">
+                    <img class = "sectionImage chickenBurgerImage" src="./src/images/chickenSandwhich.svg" alt="Chicken Sandwich Image">
+                    <div class = "textSection">
+                        <h2>Chicken Sandwich</h2>
+                        <p>A sandwich that has two buns and has a chicken patty.</p>
+                    </div>                 
+                </div>
+
+                <div class = "section">
+                    <img class = "sectionImage doubleCheeseBurgerImage" src="./src/images/doublecheeseBurger.svg" alt="Double Cheeseburger Image">
+                    <div class = "textSection">
+                        <h2>Double Cheeseburger</h2>
+                        <p>A sandwich that has two buns with fresh lettuce and italian tomatoes, with two patties.</p>
+                    </div>                 
                 </div>
             </div>
 
-            
-            
+            <div class = "sections sidesSection">
+                <div class = "section">
+                    <img class = "sectionImage friesImage" src="./src/images/fries.svg" alt="Fries Image">
+                    <div class = "textSection">
+                        <h2>French Fries</h2>
+                        <p>Potatos cut into wedges topped with salt.</p>
+                    </div>                 
+                </div>
+                <div class = "section">
+                    <img class = "sectionImage chickenImage" src="./src/images/chickenNuggets.svg" alt="Chickenuggets Image">
+                    <div class = "textSection">
+                        <h2>Chicken Nuggers</h2>
+                        <p>Chicken that is cut into a nugget shape.</p>
+                    </div>                 
+                </div>
+            </div>
 
+            <div class = "sections dessertSection">
+                <div class = "section">
+                    <img class = "sectionImage iceCreamImage" src="./src/images/icecream.svg" alt="Icrecream Image">
+                    <div class = "textSection">
+                        <h2>Icrecream</h2>
+                        <p>Delecious frozen treat with edible cone.</p>
+                    </div>                 
+                </div>
+
+                <div class = "section">
+                    <img class = "sectionImage milkshakeImage" src="./src/images/milkshake.svg" alt="Milkshake Image">
+                    <div class = "textSection">
+                        <h2>Milkshake</h2>
+                        <p>A delecious drink with milk usually mixed with icream.</p>
+                    </div>                 
+                </div>
+            </div>
+        </main>
+
+        <main class = "contactPage">
+            <h1 class = "contactTitle">Contact</h1>
+            <img class = "mapImage" src="./src/images/location.png" alt="resturant location" width= "400">
+            <h2>Information</h2>
+            <p>Adress: 1233 Fake Street 300s</p>
+            <p>Our number is 1(234)567-8900</p>
         </main>
         <footer>
-            <p>Copyright &copy; 2021 Brayden Grotegut</p>
+            <p class = "footerText">Copyright &copy; 2021 Brayden Grotegut</p>
         </footer>
     </body>
     </html>
