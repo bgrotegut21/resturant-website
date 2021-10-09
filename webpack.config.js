@@ -3,9 +3,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     mode:"development",
-    entry:"./src/scripts/index.js",
-    devServer: {
-        static:"./dist"
+    entry: {
+        index:"./src/scripts/index.js",
+        contact:"./src/scripts/contact.js",
     },
     devtool: "inline-source-map",
 
@@ -17,11 +17,23 @@ module.exports = {
             title:"Output Management"
         })
     ],
+    module: {
+        rules: [
+            { 
+                test:/\.css$/i,
+                use: ["style-loader","css-loader"],
+            },
+            {
+                test:/\.(png|svg|jpg|jpeg|gif)$/i,
+                type:"asset/resource",
+            },
+        ]
+    },
 
     output: {
-        filename:"main.js",
+        filename:"[name].bundle.js",
         path:path.resolve(__dirname, "dist"),
         clean:true,
         publicPath:"/",
-    },
+    },  
 }

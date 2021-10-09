@@ -2,3 +2,24 @@
     text-align: center;
     font-family:'Lato',"sans-serif" ;
 }
+
+@media only screen and (max-width: 410px){
+    .mapImage {
+        width:200px;
+    }
+}
+@media only screen and (max-width: 205px){
+    .mapImage {
+        width:75px;
+    }
+
+    .contactTitle, .informationText {
+        font-size: medium;
+    }
+
+    .contactParagraph {
+        font-size: x-small;
+    }
+
+
+}
