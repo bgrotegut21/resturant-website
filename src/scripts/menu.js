@@ -2,19 +2,19 @@ import arrowDownImage from "../images/arrowDrop.svg";
 import arrowUpImage from "../images/arrowUp.svg";
 import hamburgerImage from "../images/hamburger.svg";
 import cheeseBurgerImage from "../images/cheeseburger.svg";
-import chickenSandwichImage from "../image/chickenSandwhich.svg";
+import chickenSandwichImage from "../images/chickenSandwhich.svg";
 import doubleCheeseBurgerImage from "../images/doublecheeseBurger.svg";
 import friesImage from "../images/fries.svg";
 import chickenNuggets from "../images/chickenNuggets.svg";
 import iceCreamImage from "../images/icecream.svg";
 import milkshakeImage from "../images/milkshake.svg";
 
-import {createElementsChildren, setToElement} from "./elementEvents.js";
+import {createElementsChildren, setToElement, makeElementTemplate} from "./elementEvents.js";
 
 
 
 
-categoryArray = [{class: "sandwichesCategory", text:"Sandwiches"},
+let categoryArray = [{class: "sandwichesCategory", text:"Sandwiches"},
 {class: "sidesCategory", text:"Sides"},
 {class: "dessertCategory", text: "Sandwiches"}, ]
 
@@ -27,12 +27,7 @@ function createCategorySelction (){
     return categorySelection;
 }
 
-function createCurrentCategory(){
-    let currentCategory = document.createElement("div");
-    currentCategory.setAttribute("class","currentCategory");
-    return currentCategory;
 
-}
 
 function createArrowDown (){
     let arrowDown = document.createElement("img");
@@ -71,9 +66,15 @@ function setCategorySelction(categorySelection, currentCategory, arrowDown, arro
     setToElement(categorySelection,categoryItems);
 }
 
+function createCurrentCategory(){
+    let currentCategory = document.createElement("div");
+    currentCategory.setAttribute("class","currentCategory" )
+    return currentCategory;
+}
 
-function createCategorySelection(){
-    let categorySelection =createCategorySelection();
+
+function createCategorySelectionMenu(){
+    let categorySelection = createCategorySelction();
     let currentCategory =  createCurrentCategory();
     let arrowDown = createArrowDown();
     let arrowUp = createArrowUp();
@@ -82,6 +83,7 @@ function createCategorySelection(){
 
     let categories = categoryArray.map(object => createElementsChildren("button",object.class,object.text));
     setCategorySelction(categorySelection,currentCategory,arrowDown,arrowUp,currentCategoryText,categoryButtons,categories);
+    return categorySelection;
 }
 
 function createSections(className){
@@ -102,24 +104,54 @@ function createImage(imageClass, image){
     let elementImage = document.createElement("img");
     elementImage.setAttribute("class",imageClass);
     elementImage.src = image;
+    
     return elementImage;
 }
 
-function createSections(imageClass,image, divClass,h2Text, pText,){
+function createTextSection(){
+    let textSection = document.createElement("div");
+    textSection.setAttribute("class","textSection");
+    return textSection;
+
+}
+
+function createH2(h2Text){
+    let h2 = document.createElement("h2");
+    h2.textContent = h2Text;
+    return h2;
+}
+
+function createP(pText){ 
+    let p = document.createElement("p");
+    p.textContent = pText;
+    return p;
+}
+
+function createSectionsMenu(imageClass,image,h2Text, pText){
     let section = createSection();
     let elementImage = createImage(imageClass,image);
-    
+    let textSection = createTextSection();
+    let h2 = createH2(h2Text);
+    let p = createP(pText);   
 
-
-
-
+    let texts = [h2,p];
+    setToElement(textSection,texts);
+    let elements = [elementImage, textSection];
+    setToElement(section,elements);
 }
 
-function createAllSections(){
-    let sections = ["sections sandwichSection", "sections sidesSection","sections desserSection" ];
-    let sectionsElement = sections.map(section => createSections(section));
-
-
-
+function createSectionTemplate(sections,imageClass,image,h2Text,pText){
+    let template = {};
+    template.sections = sections;
+    template.imageClass = imageClass;
+    template.image = image;
+    template.h2Text = h2Text;
+    template.pText = pText;
+    return template;
 }
 
+let menuArray = [createCategorySelectionMenu()];
+
+let menuObject = makeElementTemplate(menuArray,[]);
+
+export {menuObject}

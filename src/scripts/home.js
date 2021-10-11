@@ -46,7 +46,7 @@ function createPopularItems(){
 function createPopularItemText(){
     let popularItemsText = document.createElement("h2");
     popularItemsText.textContent = "Popular Items";
-    return popularItemText;
+    return popularItemsText;
 
 }
 

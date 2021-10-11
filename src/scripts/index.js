@@ -5,7 +5,8 @@ import "../styles/adress.css";
 
 import hamburgerMenuIcon from "../images/menu.svg";
 import {contactObject} from  "./contact.js";
-import {homeInterface} from "./home.js";
+import {homeObject} from "./home.js";
+import { menuObject } from "./menu.js";
 
 import {setToElement,addBindings,createElementsChildren} from "./elementEvents.js"
 
@@ -60,13 +61,13 @@ function createNavigationMenu(){
     setToElement(nav,navArray)
     setToElement(body,nav);
     addBindings(navigationButtons,switchTabs);
+
 }
 
 
 function switchTabs(button){
-    console.log(homeInterface, "current home interface")
-    if (button.target.getAttribute("class") == "home") console.log("home")
-    if (button.target.getAttribute("class") == "menu") console.log("menu");
+    if (button.target.getAttribute("class") == "home") createMain(homeObject,"homeSection")
+    if (button.target.getAttribute("class") == "menu") createMain(menuObject,"menuSection")
     if (button.target.getAttribute("class") == "contact") createMain(contactObject,"contactPage")
 
 }
@@ -88,11 +89,6 @@ function createMain(template,className,){
 }
 
     
-
-
-
-
-
 function  createFooter() {
     let footer = document.createElement("footer");
     let paragraph = document.createElement("p");
@@ -108,10 +104,11 @@ function iniatlizeWebpage(){
     createNavigationMenu();
     main = document.createElement("main")
     setToElement(body,main);
-createFooter();
+    createFooter();
 
 }
 
+iniatlizeWebpage();
 
 
   
