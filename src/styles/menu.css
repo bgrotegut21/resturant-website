@@ -30,13 +30,11 @@
     flex-direction: column;
     align-items: center;
     margin:10px;
+    cursor:pointer;
 }
 
 
 
-.arrowUp {
-    display:none;
-}
 
 
 .currentCategory{
@@ -50,11 +48,13 @@
     display:flex;
     flex-direction:column;
 
+
 }
 
 
 .currentCategoryText {
     font-family:'Lato',"sans-serif" ;
+    margin-right:20px;
 
 }
 
@@ -74,9 +74,7 @@
     border-radius: 20px;
 }
 
-.arrowUp, .arrowDown {
-    cursor:pointer;
-}
+
 .section:hover {
     box-shadow:1px 4px 16px 1px #8E8E8E;
 
@@ -89,23 +87,6 @@
 
 .hamburgerMenu {
     cursor:pointer;
-}
-
-.categoryButtons {
-    display:none;
-}
-
-.sidesSection {
-    display:none;
-}
-
-.dessertSection {
-    display:none;
-}
-
-
-.menuSection{
-    display:none;
 }
 
 

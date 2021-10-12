@@ -3,13 +3,16 @@ export function setToElement(currentElement,elements){
     if (!Array.isArray(elements)) currentElement.appendChild(elements)
     else elements.forEach(element => currentElement.appendChild(element))
 }
-
+//if array is not button than the array is the button for addBindings and removeBindings
 export function addBindings(array,func){
-    array.forEach(button => button.addEventListener("click",func))
+    if (!Array.isArray(array)) array.addEventListener("click",func) 
+    else array.forEach(button => button.addEventListener("click",func))
 }
 
+
 export function removeBindings(array,func){
-    array.forEach(button => button.removeEventListener("click",func))
+    if (!Array.isArray(array)) array.addEventListener("click",func)
+    else array.forEach(button => button.removeEventListener("click",func))
 }
 
 export function createElementsChildren(element,className,text){
