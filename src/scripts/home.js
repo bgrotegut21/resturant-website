@@ -1,4 +1,5 @@
 import {setToElement,makeElementTemplate} from "./elementEvents.js"
+import {changeToMenu} from "./index.js";
 
 let seeMenu;
 
@@ -113,7 +114,6 @@ function setPopularItems (popularItems, popularItemsText,items,hamburgerIcon,ite
 
 
 
-
 function createPopularItemsMenu(){
     let popularItems = createPopularItems();
     let popularItemsText = createPopularItemText();
@@ -129,6 +129,9 @@ function createPopularItemsMenu(){
 
 
 let structureArray = [createBannerMenu(),createPopularItemsMenu()];
-let homeObject = makeElementTemplate(structureArray,[]);
+console.log(seeMenu.getAttribute("class"), "see menu attribute");
+let bindings = [seeMenu.getAttribute("class")];
+let homeObject = {};
+//let homeObject = makeElementTemplate(structureArray,[{bindingsArray: bindings, event:changeToMenu}]);
 export {homeObject}; 
 

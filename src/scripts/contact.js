@@ -44,6 +44,6 @@ let contactArray = [createContactTitle(), createMapImage(),
                     createInformationTitle(), createAdressText(),
                     createNumberText()];
 
-let contactObject =  makeElementTemplate(contactArray,[]);
-
+//let contactObject =  makeElementTemplate(contactArray,[]);
+let contactObject = {};
 export {contactObject};

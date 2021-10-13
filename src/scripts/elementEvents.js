@@ -23,6 +23,5 @@ export function createElementsChildren(element,className,text){
 }
 
 export function makeElementTemplate(array,events){
-    let elementObject = {array, events};
-    return elementObject;
+    console.log(events, "current events")
 }
