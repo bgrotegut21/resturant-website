@@ -12,160 +12,94 @@ import milkshakeImage from "../images/milkshake.svg";
 import {renderSections} from "./index.js"
 import {createElementsChildren, setToElement, makeElementTemplate,addBindings,removeBindings} from "./elementEvents.js";
 
-
-
-
-
 let categoryArray = [{class: "sandwichesCategory", text:"Sandwiches"},
 {class: "sidesCategory", text:"Sides"},
 {class: "dessertCategory", text: "Desserts"}, ]
 
-let categoryButtons;
-let currentCategory = true;
-let categories;
-let categorySelection;
-let arrow;
-let currentMenuCategory = "sandwiches"
-let currentCategoryText;
+let categorySelection = createElement("div","categorySelection");
+let currentCategory = createElement("div","currentCategory");
+let arrow = createElement("img","arrow",arrowDownImage);
+let currentCategoryText = createElement("h2","currentCategoryText","","Sandwiches");
+let categoryButtons = createElement("div","categoryButtons");
+let sections = createElement("div","sections")
+let buttonArray;
 
 
-function createCategorySelction (){
-    let categorySelection = document.createElement("div");
-    categorySelection.setAttribute("class","categorySelection");
-    return categorySelection;
+
+function renderMenuElements(){
+    categorySelection.innerHTML = "";
+    let currentCategoryElements = [arrow, currentCategoryText];
+
+    let buttonArray = createCategoriesButton();
+
+    let currentCategoryElement = addElements(currentCategory, currentCategoryElements);
+    let categoryButtonElement = addElements(categoryButtons,buttonArray);
+    let categorySelectedChildren = [currentCategoryElement, categoryButtonElement];
+    let categorySelectionElement = addElements(categorySelection, categorySelectedChildren);
+    let sectionsElement = sections.outerHTML;
+
+    console.log(categorySelectionElement, "categoery selection")
+    let finalElements = categorySelectionElement + sectionsElement;
+   // console.log(finalElements, "final elements")
+    return finalElements;
+    
+
+
+}
+
+function addElements(parentElement,childrenElements){
+    childrenElements.forEach(element => parentElement.innerHTML += element.outerHTML); 
+    let newElement = parentElement.outerHTML;
+    parentElement.innerHTML = "";
+    return newElement;
+
+}
+
+
+function createCategoriesButton (){
+    let buttons = [];
+    categoryArray.forEach(object => {
+       let button =  createElement("button",object.class,"",object.text);
+       buttons.push(button);
+    })
+    return buttons;
+    
 }
 
 
 
-function createArrow(arrowImage){
-    arrow = document.createElement("img")
-    arrow.setAttribute("class","arrow");
-    arrow.src = arrowImage;
-    return arrow;
+
+function createElement(element,className,src,content){
+    let elementAttributes = [element,className,src,content];
+    let elementObject = {};
+    elementObject.element = element;
+    elementObject.className = className;
+    elementObject.source = src;
+    elementObject.content = content;
+    
+    let elementKeys = Object.keys(elementObject);
+    let index = 0;
+    elementKeys.forEach(key => {
+        if (typeof elementAttributes[index] == "undefined") elementObject[key] = "";
+        index ++;
+    })
+    return generateNewElement(elementObject);
 }
 
-function changeArrowImage(arrowImage){ 
-    arrow.src = arrowImage;
-}
-
-function createCurrentCategoryText(){
-    let currentCategoryText =  document.createElement("h2");
-    currentCategoryText.textContent = "Sandwiches";
-    currentCategoryText.setAttribute("class","currentCategoryText");
-    return currentCategoryText;
-}
-
-function createCategoryButtons(){
-    let categoryButtons = document.createElement("div");
-    categoryButtons.setAttribute("class", "categoryButtons");
-    return categoryButtons;
-
-}
-
-function setCategorySelction(categorySelection, currentCategory, arrow,currentCategoryText, categoryButtons){
-   // console.log("setting category selction")
-    let currentCategoryItems = [arrow, currentCategoryText];
-    //console.log(currentCategoryItems, "current category items")
-    setToElement(currentCategory,currentCategoryItems);
-
-  
-    let categoryItems = [currentCategory, categoryButtons];
-    setToElement(categorySelection,categoryItems);
-  //  console.log(categorySelection, "current categoery selection")
-    return categorySelection;
-}
-
-function createCurrentCategory(){
-    let currentCategory = document.createElement("div");
-    currentCategory.setAttribute("class","currentCategory" )
-    return currentCategory;
-}
-
-
-function createCategorySelectionMenu(){
-    categorySelection = createCategorySelction();
-    let currentCategory =  createCurrentCategory();
-    arrow = createArrow(arrowDownImage)
-    currentCategoryText =  createCurrentCategoryText();
-    categoryButtons = createCategoryButtons();
-    return setCategorySelction(categorySelection,currentCategory,arrow,currentCategoryText,categoryButtons);
-}
-
-function shadeButton(button){
-    console.log("shading button")
-    let grey = "rgb(249, 248, 248)";
-    button.style.backgroundColor = grey;
-    button.style.borderRadius = "20px";
-}
-
-
-function unshadeCategories(){
-    console.log(categories, "current categories")
-    categories.forEach(button => button.style.backgroundColor = "white")
-}
-
-function checkCurrentCategory(button){
- //   console.log(currentMenuCategory, "current menu category")
-    if (currentMenuCategory == "sandwiches"){
-      //  console.log(button.getAttribute("class") == "sandwichesCategory","button attribute class")
-        if (button.getAttribute("class") == "sandwichesCategory") shadeButton(button)
-    } else if (currentMenuCategory == "sides"){
-        if(button.getAttribute("class") == "sidesCategory") shadeButton(button);
+function generateNewElement(elementObject){
+    let newElement;
+    if (elementObject.src != ""){
+        newElement = document.createElement("img");
+        newElement.src = elementObject.src;
+        newElement.classList = elementObject.className;
     } else {
-        if (button.getAttribute("class") == "dessertCategory") shadeButton(button);
+        newElement = document.createElement(elementObject.element);
+        newElement.classList = elementObject.className;
+        newElement.textContent = elementObject.content;
     }
+    return newElement;
 }
 
-function createButtons(){
-    categories = categoryArray.map( item => {
-        let button = createElementsChildren("button",item.class,item.text);
-        checkCurrentCategory(button);
-        addBindings(button,changeCategory);
-
-        return button
-    });
-
-}
-
-
-function createCategories(){
-    createButtons();
-    setToElement(categoryButtons, categories);
-    return categories;
-}
-
-function removeCategories(){
-    removeBindings(categories, changeCategory);
-    categoryButtons.innerHTML = "";
-
-    
-}
-
-function changeCategory(event){
-    let button = event.target;
-    if(button.getAttribute("class") == "sandwichesCategory") {
-        unshadeCategories();
-        currentMenuCategory = "sandwiches";
-        checkCurrentCategory(button);
-        populateSections("sandwichSection")
-        currentCategoryText.textContent = "Sandwiches"
-
-    } else if (button.getAttribute("class") == "sidesCategory") {
-        unshadeCategories();
-        currentMenuCategory = "sides"
-        checkCurrentCategory(button)
-        populateSections("sidesSection")
-        currentCategoryText.textContent = "Sides"
-     } else {
-         unshadeCategories();
-         currentMenuCategory = "dessert";
-         checkCurrentCategory(button);
-         populateSections("dessertSection");
-         currentCategoryText.textContent = "Dessert"
-     }
-     toggleCategories(); 
-    
-}
 
 function createSandwhichSections(){
     let hamburgerText = "A sandwich that has two buns, made with fresh italian tomatoes, and delecious beef."
@@ -201,101 +135,10 @@ function createDessertSection(){
 
 }
 
-function populateSections(className){
-    if (className == "sandwichSection" ){
-        let sandwichSection = createSandwhichSections();
-        renderSections(sandwichSection);
-       
-    } else if (className == "sidesSection") {
-        let sidesSection = createSidesSection();
-        renderSections(sidesSection);
-
-    } else if (className == "dessertSection"){
-        let dessertSection = createDessertSection();
-        renderSections(dessertSection);
-    }
-}
 
 
-function toggleCategories(){
-    console.log("toggling categories")
-    if(currentCategory) {
-        changeArrowImage(arrowUpImage);
-        createCategories();
-    } else {
-        changeArrowImage(arrowDownImage);
-        removeCategories();
-    }
-    currentCategory = !currentCategory
-
-}
-
-function createSections(className){
-    let sections = document.createElement("div");
-    sections.setAttribute("class",className);
-    return sections;
-
-}
-
-function createSection(){
-    let section = document.createElement("div");
-    section.setAttribute("class","section");
-    return section;
-    
-}
-
-function createImage(imageClass, image){
-    let elementImage = document.createElement("img");
-    elementImage.setAttribute("class",imageClass);
-    elementImage.src = image;
-    
-    return elementImage;
-}
-
-function createTextSection(){
-    let textSection = document.createElement("div");
-    textSection.setAttribute("class","textSection");
-    return textSection;
-
-}
-
-function createH2(h2Text){
-    let h2 = document.createElement("h2");
-    h2.textContent = h2Text;
-    return h2;
-}
-
-function createP(pText){ 
-    let p = document.createElement("p");
-    p.textContent = pText;
-    return p;
-}
-
-function createFoodSections(){
-    let sections = document.createElement("div")
-    sections.classList = "sections";
-    return sections;
-}
-
-
-function createSectionsMenu(imageClass,image,h2Text, pText){
-    let section = createSection();
-    let elementImage = createImage(imageClass,image);
-    let textSection = createTextSection();
-    let h2 = createH2(h2Text);
-    let p = createP(pText);   
-
-    let texts = [h2,p];
-    setToElement(textSection,texts);
-    let elements = [elementImage, textSection];
-    setToElement(section,elements);
-    return section;
-}
-let menuArray = [createCategorySelectionMenu(), createFoodSections()];
-
-let bindings = [arrow.getAttribute("class"), currentCategoryText.getAttribute("class")];
-
-let menuObject = makeElementTemplate(menuArray,[{bindingsArray: bindings, event: toggleCategories}]);
+let menuElement = renderMenuElements();
+let menuObject = makeElementTemplate([menuElement],[]);
 console.log(menuObject,"current menu object")
 export {menuObject}
 
