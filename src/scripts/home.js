@@ -1,137 +1,54 @@
-import {setToElement,makeElementTemplate} from "./elementEvents.js"
-import {changeToMenu} from "./index.js";
+import {makeElementTemplate,addElements,createElement,createBindingTemplate} from "./elementEvents.js"
+import {switchToMenu} from "./index.js";
 
-let seeMenu;
 
-function createBanner(){
-    let banner = document.createElement("div");
-    banner.setAttribute("class","banner");
-    return banner;
+let sectionsClassNames = [{className:"hamburgerIcon",text:"Hamburger"},{className:"icecreamIcon",text:"Icecream"}]
 
-}
 
-function createBurgerSaleMenu(){
-    let burgerSaleMenu = document.createElement("div");
-    burgerSaleMenu.setAttribute("class","burgerSaleMenu");
-    return burgerSaleMenu;
-}
+function renderHomeElements(){
+    let banner = createElement("div","banner");
+    let burgerSaleMenu = createElement("div","burgerSaleMenu");
+    let tastyBurgerText = createElement("h1","h1Text","","Tasty Burger")
+    let halfOffText = createElement("h2","h2Text","","50% Off!");
+    let seeMenu = createElement("button","seeMenu","","See Menu");
+    let popularItems = createElement("div","popularItems");
+    let popularItemsText = createElement("h2","h2Text","","Popular Items");
+    let itemsElement = createElement("div","items");
+    let items = sectionsClassNames.map(object => createSections(object.className, object.text));
 
-function createTasteBurgerText(){
-    let tasteBurgerText = document.createElement("h1");
-    tasteBurgerText.textContent = "Tasty Burger";
-    return tasteBurgerText;
-
-}
-
-function createPercentOffText(){
-    let percentOffText = document.createElement("h2");
-    percentOffText.textContent = "50% Off!";
-    return percentOffText;
-
-}
-
-function createSeeMenu(){
-    seeMenu = document.createElement("button");
-    seeMenu.setAttribute("class","seeMenu");
-    seeMenu.innerHTML = "See Menu";
-    return seeMenu;
-
-}
-
-function createPopularItems(){
-    let popularItems = document.createElement("div");  
-    popularItems.setAttribute("class","popularItems");
-    return popularItems;
-}
-
-function createPopularItemText(){
-    let popularItemsText = document.createElement("h2");
-    popularItemsText.textContent = "Popular Items";
-    return popularItemsText;
-
-}
-
-function createItems(){
-    let items = document.createElement("div");
-    items.setAttribute("class","items")
-    return items;
-
-}
-
-function createHamburgerIcon (){
-    let hamburgerIcon = document.createElement("div");
-    hamburgerIcon.setAttribute("class", "item hamburgerIcon");
-    return hamburgerIcon;
-
-}
-
-function createItemText(){
-    let itemText = document.createElement("h2");
-    itemText.setAttribute("class","itemText");
-    itemText.textContent = "Hamburger"
-    return itemText;
-}
-
-function createIcecreamIcon(){
-    let icecreamIcon = document.createElement("div");
-    icecreamIcon.setAttribute("class","item icecreamIcon");
-    return icecreamIcon;
-
-}
-
-function createItemText2(){
-    let itemText2 = document.createElement("h2");
-    itemText2.setAttribute("class","itemText")
-    itemText2.textContent = "Icecream"
-    return itemText2;
+    let burgerSaleMenuItems = [tastyBurgerText, halfOffText,seeMenu];
     
+    banner.innerHTML = "";
+    popularItems.innerHTML = "";
+
+    addElements(burgerSaleMenu, burgerSaleMenuItems)
+    console.log(burgerSaleMenu, "burger sale menu items");
+    addElements(banner, [burgerSaleMenu]);
+
+    items.forEach(item => itemsElement.innerHTML += item);
+    let popularItemsElements = [popularItemsText, itemsElement];
+    addElements(popularItems, popularItemsElements);
+    console.log(banner.outerHTML, "banner outer html");
+    console.log(popularItems.outerHTML, "popular items outer html")
+    return banner.outerHTML + popularItems.outerHTML;
+
+
 }
 
+function createSections(className,text){
+    let item = createElement("div",`item ${className}`);
+    let itemText  = createElement("h2","itemText","",text);
 
-function createBannerMenu(){
-    let tasteBurgerText = createTasteBurgerText();
-    let percentOffText = createPercentOffText();
-    let seeMenu = createSeeMenu();
-    let banner = createBanner();
-    let burgerSaleMenu = createBurgerSaleMenu();
-
-    let elementsArray = [tasteBurgerText, percentOffText, seeMenu];
-    setToElement(burgerSaleMenu,elementsArray);
-    setToElement(banner,burgerSaleMenu);
-    return banner;
-    }
-
-
-function setPopularItems (popularItems, popularItemsText,items,hamburgerIcon,itemText,icecreamIcon,itemText2){
-        setToElement(hamburgerIcon,itemText);
-        setToElement(icecreamIcon,itemText2);
-        let icons = [hamburgerIcon,icecreamIcon]
-        setToElement(items,icons);
-        let itemsArray = [popularItemsText,items];
-        setToElement(popularItems,itemsArray);
-        return popularItems;
-}
-
-
-
-function createPopularItemsMenu(){
-    let popularItems = createPopularItems();
-    let popularItemsText = createPopularItemText();
-    let items = createItems();
-    let hamburgerIcon = createHamburgerIcon();
-    let itemText = createItemText();
-    let icecreamIcon = createIcecreamIcon();
-    let itemText2 = createItemText2();
+    addElements(item,[itemText]);
+    return item.outerHTML;
     
-    return setPopularItems(popularItems,popularItemsText,items,hamburgerIcon,itemText,icecreamIcon,itemText2)
+
 }
 
 
+let homePage = renderHomeElements();
+let bindings = ["seeMenu"]
 
-let structureArray = [createBannerMenu(),createPopularItemsMenu()];
-console.log(seeMenu.getAttribute("class"), "see menu attribute");
-let bindings = [seeMenu.getAttribute("class")];
-let homeObject = {};
-//let homeObject = makeElementTemplate(structureArray,[{bindingsArray: bindings, event:changeToMenu}]);
-export {homeObject}; 
+let homeObject = makeElementTemplate(homePage,[createBindingTemplate(bindings,switchToMenu)])
 
+export {homeObject};

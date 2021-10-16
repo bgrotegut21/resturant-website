@@ -1,5 +1,4 @@
-import arrowDownImage from "../images/arrowDrop.svg";
-import arrowUpImage from "../images/arrowUp.svg";
+
 import hamburgerImage from "../images/hamburger.svg";
 import cheeseBurgerImage from "../images/cheeseburger.svg";
 import chickenSandwichImage from "../images/chickenSandwhich.svg";
@@ -9,51 +8,57 @@ import chickenNuggetsImage from "../images/chickenNuggets.svg";
 import iceCreamImage from "../images/icecream.svg";
 import milkshakeImage from "../images/milkshake.svg";
 
-import {renderSections} from "./index.js"
-import {createElementsChildren, setToElement, makeElementTemplate,addBindings,removeBindings} from "./elementEvents.js";
+import arrowDownImage from "../images/arrowDrop.svg";
+import arrowUpImage from "../images/arrowUp.svg";
 
-let categoryArray = [{class: "sandwichesCategory", text:"Sandwiches"},
-{class: "sidesCategory", text:"Sides"},
-{class: "dessertCategory", text: "Desserts"}, ]
 
+import {toggleCategories, addEventBindings, removeEventBindings} from "./index.js"
+import {createElementsChildren, setToElement, makeElementTemplate,addBindings,removeBindings, createBindingTemplate,createElement, addElements} from "./elementEvents.js";
+
+let categoryArray = [{class: "sandwichesCategory button", text:"Sandwiches"},
+{class: "sidesCategory button", text:"Sides"},
+{class: "dessertCategory button", text: "Desserts"}, ]
+
+
+
+//elements
 let categorySelection = createElement("div","categorySelection");
 let currentCategory = createElement("div","currentCategory");
 let arrow = createElement("img","arrow",arrowDownImage);
 let currentCategoryText = createElement("h2","currentCategoryText","","Sandwiches");
 let categoryButtons = createElement("div","categoryButtons");
-let sections = createElement("div","sections")
+let sections = createElement("div","sections");
+
+console.log(categoryButtons.outerHTML, "category buttons")
+
+let currentSections = "sandwiches";
 let buttonArray;
+
+//elements from the main element
 
 
 
 function renderMenuElements(){
-    categorySelection.innerHTML = "";
+    let importantSections = [currentCategory, categoryButtons, categorySelection,sections];
+    importantSections.forEach(section => section.innerHTML = "");
+
     let currentCategoryElements = [arrow, currentCategoryText];
 
     let buttonArray = createCategoriesButton();
-
     let currentCategoryElement = addElements(currentCategory, currentCategoryElements);
-    let categoryButtonElement = addElements(categoryButtons,buttonArray);
-    let categorySelectedChildren = [currentCategoryElement, categoryButtonElement];
+   // let categoryButtonElement = addElements(categoryButtons,buttonArray);
+    let categorySelectedChildren = [currentCategoryElement, categoryButtons];
+
     let categorySelectionElement = addElements(categorySelection, categorySelectedChildren);
-    let sectionsElement = sections.outerHTML;
+    let sectionsElement = sections;
+    let sandwichSection = createSandwhichSections();
+    sandwichSection.forEach(section => sections.innerHTML += section);
 
-    console.log(categorySelectionElement, "categoery selection")
-    let finalElements = categorySelectionElement + sectionsElement;
-   // console.log(finalElements, "final elements")
+    let finalElements = categorySelectionElement.outerHTML + sectionsElement.outerHTML;
     return finalElements;
-    
-
-
 }
 
-function addElements(parentElement,childrenElements){
-    childrenElements.forEach(element => parentElement.innerHTML += element.outerHTML); 
-    let newElement = parentElement.outerHTML;
-    parentElement.innerHTML = "";
-    return newElement;
 
-}
 
 
 function createCategoriesButton (){
@@ -66,44 +71,79 @@ function createCategoriesButton (){
     
 }
 
+export function renderButtons(bool,main){
+    let categoryButtons = main.querySelector(".categoryButtons");
+    let newButtons = main.getElementsByClassName("button");
 
 
+    let newButtonsArray = Array.from(newButtons);
+    if(newButtons.length != 0) removeBindings(newButtonsArray,createSections);
+    categoryButtons.innerHTML = "";
 
-function createElement(element,className,src,content){
-    let elementAttributes = [element,className,src,content];
-    let elementObject = {};
-    elementObject.element = element;
-    elementObject.className = className;
-    elementObject.source = src;
-    elementObject.content = content;
-    
-    let elementKeys = Object.keys(elementObject);
-    let index = 0;
-    elementKeys.forEach(key => {
-        if (typeof elementAttributes[index] == "undefined") elementObject[key] = "";
-        index ++;
-    })
-    return generateNewElement(elementObject);
-}
 
-function generateNewElement(elementObject){
-    let newElement;
-    if (elementObject.src != ""){
-        newElement = document.createElement("img");
-        newElement.src = elementObject.src;
-        newElement.classList = elementObject.className;
-    } else {
-        newElement = document.createElement(elementObject.element);
-        newElement.classList = elementObject.className;
-        newElement.textContent = elementObject.content;
+    if (bool){
+        let buttons = createCategoriesButton();
+        addElements(categoryButtons,buttons);
+        newButtons = main.getElementsByClassName("button");
+        newButtonsArray = Array.from(newButtons);
+        newButtonsArray.forEach(button => button.mainHolder = main);
+        addBindings(newButtonsArray,createSections);
+
     }
-    return newElement;
 }
 
+function makeSection(newSection,currentCategoryText,text,main){
+    let sections = newSection();
+    currentCategoryText.textContent = text;
+    renderSections(sections,main)
+}
+
+function createSections(event){
+    console.log("create sections")
+    let main = event.target.mainHolder;
+    let arrow = main.querySelector(".arrow")
+    let currentCategoryText = main.querySelector(".currentCategoryText");
+    let eventClass = event.target.classList[0];
+
+
+    if (eventClass == "sandwichesCategory") {
+        makeSection(createSandwhichSections,currentCategoryText,"Sandwiches",main)
+    } else if (eventClass == "sidesCategory"){
+        makeSection(createSidesSection,currentCategoryText,"Sides",main)
+    } else if (eventClass == "dessertCategory") {
+        makeSection(createDessertSection,currentCategoryText, "Desserts",main)
+    }
+    renderButtons(false,main);
+    arrow.src = arrowDownImage;
+}
+
+
+function renderSections(sections,main){
+    console.log(main, "current main")
+    let section = main.querySelector(".sections")
+    section.innerHTML = ""
+    sections.forEach(block => section.innerHTML += block);
+
+}
+
+function createSectionsMenu(imageClass, image, h2Text, pText){
+    let sections = createElement("div","section")
+    let img = createElement("img", imageClass,image);
+    let textSection = createElement("div","textSection");
+    let h2 = createElement("h2","h2Text","",h2Text);
+    let p = createElement("p","pText","",pText)
+
+    let textSectionElements = [h2,p];
+    let newTextSection = addElements(textSection,textSectionElements);
+    let sectionElements = [img,newTextSection];
+    let newSections = addElements(sections,sectionElements);
+    return newSections.outerHTML;
+
+}
 
 function createSandwhichSections(){
     let hamburgerText = "A sandwich that has two buns, made with fresh italian tomatoes, and delecious beef."
-    let hamburgerSection = createSectionsMenu("sectionImage hamburgerImage",hamburgerImage,"hamburger",hamburgerText);
+    let hamburgerSection = createSectionsMenu("sectionImage hamburgerImage",hamburgerImage,"Hamburger",hamburgerText);
     let cheeseBurgerText = "A sandwich that has two buns, made with fresh italian tomatoes, and delecious beef and cheddar cheese."
     let cheeseBurgerSection = createSectionsMenu("sectionImage cheeseburgerImage",cheeseBurgerImage,"Cheeseburger", cheeseBurgerText);
     let chickenBurgerText ="A sandwich that has two buns and has a chicken patty.";
@@ -132,13 +172,15 @@ function createDessertSection(){
     let milkShakeSection = createSectionsMenu("sectionImage milkshakeImage",milkshakeImage,"Milkshake",millkshakeText);
     let desserts = [icecreamSection, milkShakeSection];
     return desserts;
-
+ 
 }
 
 
 
-let menuElement = renderMenuElements();
-let menuObject = makeElementTemplate([menuElement],[]);
-console.log(menuObject,"current menu object")
+
+let menuPage = renderMenuElements();
+let bindings = [arrow.className, currentCategoryText.className]
+
+let menuObject = makeElementTemplate(menuPage,[createBindingTemplate(bindings,toggleCategories)]);
 export {menuObject}
 
