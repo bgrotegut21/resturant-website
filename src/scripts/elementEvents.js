@@ -11,12 +11,6 @@ export function removeBindings(array,func){
     else array.forEach(button => button.removeEventListener("click",func))
 }
 
-export function createElementsChildren(element,className,text){
-    let newElement = document.createElement(element);
-    newElement.setAttribute("class",className);
-    newElement.innerHTML = text;
-    return newElement;
-}
 
 export function makeElementTemplate(page,array){
    let object = {};
@@ -32,10 +26,16 @@ export function createBindingTemplate(array,event){
     return object;
 }
 
-export function setToElement(currentElement,elements){
-    if (!Array.isArray(elements)) currentElement.appendChild(elements)
-    else elements.forEach(element => currentElement.appendChild(element))
+export function createCategoriesButton (array){
+    let buttons = [];
+    array.forEach(object => {
+       let button =  createElement("button",object.class,"",object.text);
+       buttons.push(button);
+    })
+    return buttons;
+    
 }
+
 
 export function createElement(element,className,src,content){
     let elementAttributes = [element,className,src,content];

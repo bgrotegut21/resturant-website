@@ -31,7 +31,7 @@ nav {
 
 
 .homeSection{
-    font-family:'Lato',"sans-serif" ;
+    font-family:'Lato',"sanxfs-serif" ;
 }
 .navTitle {
     text-align:center;
@@ -126,6 +126,7 @@ button {
     margin-right:20px;
     margin-top:10px;
     display:flex;
+ 
     flex-direction: row;
     flex-wrap: wrap;
     justify-content:space-around;
@@ -133,7 +134,7 @@ button {
 }
 
 .item{
-    margin-top:10px;
+    margin:10px;
     width:250px;
     height:250px;
     line-height: 250px;
@@ -152,11 +153,13 @@ button {
 
 
 .popularItems {
-
     margin-top:20px;
     margin-left: 20px;
     margin-right:20px;
     text-align: center;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
 
 }
 
