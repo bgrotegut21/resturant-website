@@ -5,7 +5,14 @@ module.exports = {
     mode:"development",
     entry: {
         index:"./src/scripts/index.js",
+        home:"./src/scripts/home.js",
+        navigation:"./src/scripts/navigation.js",
+        menu:"./src/scripts/menu.js",
         contact:"./src/scripts/contact.js",
+        elementEvents:"./src/scripts/elementEvents.js",
+       
+        
+
     },
     devtool: "inline-source-map",
 
@@ -14,7 +21,7 @@ module.exports = {
     },
     plugins:[
         new HtmlWebpackPlugin({
-            title:"Output Management"
+            title:"McRonalds"
         })
     ],
     module: {
@@ -33,7 +40,7 @@ module.exports = {
     output: {
         filename:"[name].bundle.js",
         path:path.resolve(__dirname, "dist"),
-        clean:true,
+        clean:true,  
         publicPath:"/",
     },  
 }

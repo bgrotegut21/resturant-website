@@ -9,19 +9,14 @@ import iceCreamImage from "../images/icecream.svg";
 import milkshakeImage from "../images/milkshake.svg";
 
 import arrowDownImage from "../images/arrowDrop.svg";
-import arrowUpImage from "../images/arrowUp.svg";
 
-
-import {toggleCategories, addEventBindings, removeEventBindings} from "./index.js"
-import {createElementsChildren, setToElement, makeElementTemplate,addBindings,removeBindings, createBindingTemplate,createElement, addElements} from "./elementEvents.js";
+import {toggleCategories, addEventBindings, removeEventBindings} from "./navigation.js"
+import {makeElementTemplate,addBindings,removeBindings, createBindingTemplate,createElement, addElements, createCategoriesButton} from "./elementEvents.js";
 
 let categoryArray = [{class: "sandwichesCategory button", text:"Sandwiches"},
 {class: "sidesCategory button", text:"Sides"},
 {class: "dessertCategory button", text: "Desserts"}, ]
 
-
-
-//elements
 let categorySelection = createElement("div","categorySelection");
 let currentCategory = createElement("div","currentCategory");
 let arrow = createElement("img","arrow",arrowDownImage);
@@ -29,24 +24,14 @@ let currentCategoryText = createElement("h2","currentCategoryText","","Sandwiche
 let categoryButtons = createElement("div","categoryButtons");
 let sections = createElement("div","sections");
 
-console.log(categoryButtons.outerHTML, "category buttons")
-
-let currentSections = "sandwiches";
-let buttonArray;
-
-//elements from the main element
-
-
-
 function renderMenuElements(){
     let importantSections = [currentCategory, categoryButtons, categorySelection,sections];
     importantSections.forEach(section => section.innerHTML = "");
 
     let currentCategoryElements = [arrow, currentCategoryText];
 
-    let buttonArray = createCategoriesButton();
+    let buttonArray = createCategoriesButton(categoryArray);
     let currentCategoryElement = addElements(currentCategory, currentCategoryElements);
-   // let categoryButtonElement = addElements(categoryButtons,buttonArray);
     let categorySelectedChildren = [currentCategoryElement, categoryButtons];
 
     let categorySelectionElement = addElements(categorySelection, categorySelectedChildren);
@@ -61,28 +46,18 @@ function renderMenuElements(){
 
 
 
-function createCategoriesButton (){
-    let buttons = [];
-    categoryArray.forEach(object => {
-       let button =  createElement("button",object.class,"",object.text);
-       buttons.push(button);
-    })
-    return buttons;
-    
-}
+
 
 export function renderButtons(bool,main){
     let categoryButtons = main.querySelector(".categoryButtons");
     let newButtons = main.getElementsByClassName("button");
 
-
     let newButtonsArray = Array.from(newButtons);
     if(newButtons.length != 0) removeBindings(newButtonsArray,createSections);
     categoryButtons.innerHTML = "";
 
-
     if (bool){
-        let buttons = createCategoriesButton();
+        let buttons = createCategoriesButton(categoryArray);
         addElements(categoryButtons,buttons);
         newButtons = main.getElementsByClassName("button");
         newButtonsArray = Array.from(newButtons);
@@ -99,12 +74,10 @@ function makeSection(newSection,currentCategoryText,text,main){
 }
 
 function createSections(event){
-    console.log("create sections")
     let main = event.target.mainHolder;
     let arrow = main.querySelector(".arrow")
     let currentCategoryText = main.querySelector(".currentCategoryText");
     let eventClass = event.target.classList[0];
-
 
     if (eventClass == "sandwichesCategory") {
         makeSection(createSandwhichSections,currentCategoryText,"Sandwiches",main)

@@ -1,5 +1,6 @@
 import {makeElementTemplate, addElements, createElement, createBindingTemplate} from "./elementEvents.js";
 import locationImage from "../images/location.png";
+import {renderSections} from "./navigation.js"
 
 
 function renderContactElements(){

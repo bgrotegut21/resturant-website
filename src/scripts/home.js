@@ -1,5 +1,8 @@
+
+
+
 import {makeElementTemplate,addElements,createElement,createBindingTemplate} from "./elementEvents.js"
-import {switchToMenu} from "./index.js";
+import {switchToMenu} from "./navigation.js";
 
 
 let sectionsClassNames = [{className:"hamburgerIcon",text:"Hamburger"},{className:"icecreamIcon",text:"Icecream"}]
@@ -22,17 +25,12 @@ function renderHomeElements(){
     popularItems.innerHTML = "";
 
     addElements(burgerSaleMenu, burgerSaleMenuItems)
-    console.log(burgerSaleMenu, "burger sale menu items");
     addElements(banner, [burgerSaleMenu]);
 
     items.forEach(item => itemsElement.innerHTML += item);
     let popularItemsElements = [popularItemsText, itemsElement];
     addElements(popularItems, popularItemsElements);
-    console.log(banner.outerHTML, "banner outer html");
-    console.log(popularItems.outerHTML, "popular items outer html")
     return banner.outerHTML + popularItems.outerHTML;
-
-
 }
 
 function createSections(className,text){
@@ -49,6 +47,6 @@ function createSections(className,text){
 let homePage = renderHomeElements();
 let bindings = ["seeMenu"]
 
-let homeObject = makeElementTemplate(homePage,[createBindingTemplate(bindings,switchToMenu)])
 
+let homeObject = makeElementTemplate(homePage,[createBindingTemplate(bindings,switchToMenu)])
 export {homeObject};

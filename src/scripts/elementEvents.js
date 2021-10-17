@@ -1,6 +1,5 @@
 //if array is not button than the array is the button for addBindings and removeBindings
 export function addBindings(array,func){
-    console.log(array, "current array")
     if (!Array.isArray(array)) array.addEventListener("click",func) 
     else array.forEach(button => button.addEventListener("click",func))
 }
@@ -69,8 +68,6 @@ export function createElement(element,className,src,content){
 }
 
 export function addElements(parentElement,childrenElements){
-    console.log(childrenElements, "current children elements")
     childrenElements.forEach(element => parentElement.innerHTML += element.outerHTML); 
     return parentElement;
-
 }
