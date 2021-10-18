@@ -29,8 +29,6 @@ function renderMenuElements(){
     importantSections.forEach(section => section.innerHTML = "");
 
     let currentCategoryElements = [arrow, currentCategoryText];
-
-    let buttonArray = createCategoriesButton(categoryArray);
     let currentCategoryElement = addElements(currentCategory, currentCategoryElements);
     let categorySelectedChildren = [currentCategoryElement, categoryButtons];
 
@@ -92,7 +90,6 @@ function createSections(event){
 
 
 function renderSections(sections,main){
-    console.log(main, "current main")
     let section = main.querySelector(".sections")
     section.innerHTML = ""
     sections.forEach(block => section.innerHTML += block);
